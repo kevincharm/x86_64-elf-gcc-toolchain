@@ -52,6 +52,12 @@ RUN wget -q ftp://ftp.gnu.org/gnu/grub/$DOWNLOAD_GRUB.tar.gz             && \
     make install                                                         && \
     rm -r /$DOWNLOAD_GRUB /srv/build_grub
 
+# GNU-EFI / EFI headers / EFI tools
+RUN apt-get install -y gnu-efi
+RUN apt-get install -y parted mtools
+
+COPY mkbootimg /usr/bin/mkbootimg
+
 # cleanup
 RUN apt-get clean autoclean                                              && \
     apt-get autoremove -y                                                && \
